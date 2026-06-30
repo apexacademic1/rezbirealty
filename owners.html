@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>List Your Property — RezbiRealty</title>
+<meta name="description" content="Own an apartment in NYC? List it with RezbiRealty to reach qualified, pre-screened renters and buyers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<section class="hero" style="padding-bottom:30px">
+  <div class="wrap split">
+    <div class="reveal stack-sm">
+      <div class="eyebrow">For owners &amp; landlords</div>
+      <h1 class="display" style="font-size:clamp(36px,6vw,72px)">List your property with someone who answers.</h1>
+      <p class="lead">I market your apartment to qualified, pre-screened renters and buyers — clean photos, honest pricing, and fast, personal communication from first inquiry to signed lease.</p>
+    </div>
+    <div class="reveal">
+      <div class="cart-summary" style="position:static">
+        <h3 class="h-md" style="font-size:20px;margin-bottom:18px">Tell me about your property</h3>
+        <form id="ownerform" class="form-grid">
+          <div class="form-grid two">
+            <div class="form-field"><label>Name <span class="req">*</span></label><input class="form-control" name="name" required></div>
+            <div class="form-field"><label>Email <span class="req">*</span></label><input class="form-control" type="email" name="email" required></div>
+          </div>
+          <div class="form-field"><label>Property address</label><input class="form-control" name="address" placeholder="Street, unit, neighborhood"></div>
+          <div class="form-grid two">
+            <div class="form-field"><label>I want to</label><select class="form-control" name="goal"><option>Rent it out</option><option>Sell it</option><option>Not sure yet</option></select></div>
+            <div class="form-field"><label>Target price / rent</label><input class="form-control" name="price" placeholder="e.g. $4,200/mo"></div>
+          </div>
+          <div class="form-field"><label>Details</label><textarea class="form-control" name="message" placeholder="Beds, baths, condition, availability…"></textarea></div>
+          <button class="btn btn-primary" type="submit" style="justify-self:start">Send to Rezbi</button>
+          <div id="owner-ok"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:30px">
+  <div class="wrap">
+    <div class="paths" style="grid-template-columns:repeat(3,1fr)">
+      <div class="path-card reveal"><div class="num">STEP 01</div><h3 style="font-size:22px">Pre-screened interest</h3><p>Every inquiry comes through a pre-qualification, so you meet renters and buyers who actually fit.</p></div>
+      <div class="path-card reveal"><div class="num">STEP 02</div><h3 style="font-size:22px">Clean, honest marketing</h3><p>Sharp listing pages, accurate details, and pricing grounded in what the market is really doing.</p></div>
+      <div class="path-card reveal"><div class="num">STEP 03</div><h3 style="font-size:22px">One point of contact</h3><p>You work directly with me — quick replies, clear updates, no call-center runaround.</p></div>
+    </div>
+  </div>
+</section>
+
+<script src="data/listings.js"></script>
+<script src="js/site.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("#ownerform");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const d = Object.fromEntries(new FormData(form).entries());
+    const body = `New property inquiry — RezbiRealty\n\nName: ${d.name}\nEmail: ${d.email}\nAddress: ${d.address||"—"}\nGoal: ${d.goal}\nTarget: ${d.price||"—"}\n\nDetails:\n${d.message||"—"}`;
+    if (CONFIG.formEndpoint) {
+      try { const r = await fetch(CONFIG.formEndpoint,{method:"POST",headers:{Accept:"application/json"},body:new FormData(form)});
+        if (r.ok) { done(); return; } } catch(_){}
+    }
+    window.location.href = `mailto:${CONFIG.email}?subject=${encodeURIComponent("Property listing — "+d.name)}&body=${encodeURIComponent(body)}`;
+    done(true);
+  });
+  function done(v){ form.innerHTML = `<div class="form-success"><strong>Thanks, got it.</strong><br>${v?"Your email app should be open — press send and Rezbi will be in touch.":"Rezbi will reach out shortly to talk through listing your property."}</div>`; }
+});
+</script>
+</body>
+</html>

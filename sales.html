@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For Sale — RezbiRealty</title>
+<meta name="description" content="Starter co-ops and condos for first-time buyers across New York City.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-listing-type="sale">
+
+<section class="wrap" style="padding-top:46px;padding-bottom:8px">
+  <div class="eyebrow">New York City</div>
+  <h1 class="h-xl" style="margin-top:12px;max-width:16ch">Homes priced for a first purchase.</h1>
+</section>
+
+<div class="filterbar">
+  <div class="wrap-wide filter-row">
+    <div class="field"><label>Neighborhood</label><select class="select" id="f-hood"><option value="">All areas</option></select></div>
+    <div class="field"><label>Price</label><select class="select" id="f-price">
+      <option value="">Any price</option>
+      <option value="0-600000">Up to $600k</option>
+      <option value="600000-900000">$600k – $900k</option>
+      <option value="900000-1500000">$900k – $1.5M</option>
+      <option value="1500000-99000000">$1.5M+</option>
+    </select></div>
+    <div class="field"><label>Bedrooms</label><select class="select" id="f-beds">
+      <option value="">Any</option><option value="0">Studio</option><option value="1">1 bed</option>
+      <option value="2">2 beds</option><option value="3">3 beds</option><option value="4">4+ beds</option>
+    </select></div>
+    <label class="toggle-pill"><input type="checkbox" id="f-doorman"> Doorman</label>
+    <label class="toggle-pill"><input type="checkbox" id="f-pets"> Pets ok</label>
+    <button class="filter-clear" id="f-clear">Clear</button>
+    <div class="view-toggle">
+      <button data-view="split" class="active">Map</button>
+      <button data-view="grid">Grid</button>
+    </div>
+  </div>
+</div>
+
+<div class="map-layout">
+  <div class="grid-col">
+    <div class="results-head"><span class="results-count" id="count">—</span></div>
+    <div class="grid" id="results"></div>
+  </div>
+  <div id="map"></div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="data/listings.js"></script>
+<script src="js/site.js"></script>
+<script src="js/listings.js"></script>
+</body>
+</html>

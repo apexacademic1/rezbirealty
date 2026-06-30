@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Homes &amp; Inquiry — RezbiRealty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<main id="saved-app">
+  <section class="wrap" style="padding-top:46px">
+    <div class="eyebrow">Your shortlist</div>
+    <h1 class="h-xl" style="margin-top:12px">Send one request for every home you like.</h1>
+    <p class="lead" style="margin-top:16px">Add homes to your inquiry list as you browse, fill in a quick pre-qualification, and Rezbi will reach out about viewings.</p>
+  </section>
+
+  <section class="wrap section" style="padding-top:48px">
+    <div class="cart-layout">
+      <!-- LEFT: cart + form -->
+      <div>
+        <div class="results-head"><h2 class="h-md">Homes you're interested in <span id="cart-meta" class="results-count"></span></h2></div>
+        <div id="cart-list"></div>
+
+        <h2 class="h-md" style="margin-top:50px">Pre-qualification</h2>
+        <p class="form-note" style="margin:8px 0 22px">The more you share, the faster Rezbi can match you to the right homes. Only name and email are required.</p>
+        <form id="prequal" class="form-grid">
+          <div class="form-grid two">
+            <div class="form-field"><label>Full name <span class="req">*</span></label><input class="form-control" name="name" required></div>
+            <div class="form-field"><label>Email <span class="req">*</span></label><input class="form-control" type="email" name="email" required></div>
+          </div>
+          <div class="form-grid two">
+            <div class="form-field"><label>Phone</label><input class="form-control" name="phone" inputmode="tel"></div>
+            <div class="form-field"><label>I'm looking to</label>
+              <select class="form-control" name="intent"><option>Rent</option><option>Buy</option><option>Not sure yet</option></select></div>
+          </div>
+          <div class="form-grid two">
+            <div class="form-field"><label>Move-in / timeline</label>
+              <select class="form-control" name="timeline"><option>As soon as possible</option><option>Within 1 month</option><option>1–3 months</option><option>Just exploring</option></select></div>
+            <div class="form-field"><label>Monthly budget / price range</label><input class="form-control" name="budget" placeholder="e.g. $3,500/mo or $800k"></div>
+          </div>
+          <div class="form-grid two">
+            <div class="form-field"><label>Bedrooms needed</label>
+              <select class="form-control" name="beds"><option>Studio</option><option>1</option><option>2</option><option>3</option><option>4+</option></select></div>
+            <div class="form-field"><label>Preferred neighborhoods</label><input class="form-control" name="neighborhoods" placeholder="e.g. West Village, LIC"></div>
+          </div>
+          <div class="form-grid two">
+            <div class="form-field"><label>Who's moving in?</label><input class="form-control" name="occupants" placeholder="e.g. just me, couple, 2 roommates"></div>
+            <div class="form-field"><label>Pets</label><input class="form-control" name="pets" placeholder="e.g. one cat, no pets"></div>
+          </div>
+          <div class="form-field"><label>Employment &amp; income notes</label><input class="form-control" name="income" placeholder="Employer, role, approx. annual income or guarantor"></div>
+          <div class="form-field"><label>Anything else?</label><textarea class="form-control" name="message" placeholder="Questions, must-haves, dealbreakers…"></textarea></div>
+          <input type="hidden" name="listings" id="f-listings">
+          <button class="btn btn-primary" type="submit" style="justify-self:start;margin-top:4px">Send pre-qualification</button>
+          <p class="form-note">By sending, you agree to be contacted by RezbiRealty about your home search.</p>
+        </form>
+      </div>
+
+      <!-- RIGHT: summary -->
+      <aside>
+        <div class="cart-summary">
+          <h3 class="h-md" style="font-size:19px">Why pre-qualify?</h3>
+          <ul class="amenity-grid" style="grid-template-columns:1fr;margin-top:18px">
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Skip the back-and-forth — share details once</li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Get matched to homes you actually qualify for</li>
+            <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Move quickly when the right one appears</li>
+          </ul>
+          <p class="form-note" style="margin-top:20px">Prefer to talk first? Email <a class="link-arrow" id="cart-email" href="#">Rezbi</a> directly.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- SAVED (favorites) -->
+  <section class="wrap section" style="padding-top:10px" id="saved-head">
+    <div class="results-head"><h2 class="h-lg">Saved homes</h2><span class="results-count">From the ♥ button</span></div>
+    <div class="grid" id="saved-list"></div>
+  </section>
+</main>
+
+<script src="data/listings.js"></script>
+<script src="js/site.js"></script>
+<script src="js/saved.js"></script>
+<script>document.addEventListener("DOMContentLoaded",()=>{const e=document.querySelector("#cart-email");if(e)e.href="mailto:"+CONFIG.email;});</script>
+</body>
+</html>

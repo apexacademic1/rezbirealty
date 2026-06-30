@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RezbiRealty — New York City Apartments for Rent & Sale</title>
+<meta name="description" content="A calmer way to find your first New York City apartment. Rentals and homes for sale, with a clear guide to how renting actually works.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow reveal">New York City · Rentals &amp; Sales</div>
+    <h1 class="display reveal">Your first New York apartment, without the guesswork.</h1>
+    <p class="lead reveal">RezbiRealty helps first-time renters and buyers move through the city with clarity — real listings, honest guidance, and a plain explanation of every step.</p>
+    <div class="hero-actions reveal">
+      <a class="btn btn-primary" href="rentals.html">Browse rentals</a>
+      <a class="btn btn-ghost" href="sales.html">Homes for sale</a>
+    </div>
+    <div class="hero-stats reveal">
+      <div class="stat"><div class="n" id="stat-rentals">—</div><div class="l">Active rentals</div></div>
+      <div class="stat"><div class="n" id="stat-sales">—</div><div class="l">Homes for sale</div></div>
+      <div class="stat"><div class="n">1:1</div><div class="l">Every client, personally</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- RENT vs BUY -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="paths">
+      <a class="path-card reveal" href="rentals.html">
+        <div class="num">PATH 01</div>
+        <h3>I'm renting</h3>
+        <p>See no-fee and full-service rentals across Manhattan, Brooklyn and Queens — filtered to what actually matters to you.</p>
+        <span class="link-arrow">Explore rentals →</span>
+      </a>
+      <a class="path-card reveal" href="sales.html">
+        <div class="num">PATH 02</div>
+        <h3>I'm buying</h3>
+        <p>Browse starter co-ops and condos priced for first-time buyers, with the real numbers laid out clearly.</p>
+        <span class="link-arrow">Explore homes for sale →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="results-head">
+      <div><div class="eyebrow reveal">Recently listed</div><h2 class="h-lg reveal" style="margin-top:10px">A few homes worth seeing</h2></div>
+      <a class="link-arrow reveal" href="rentals.html">View all rentals →</a>
+    </div>
+    <div class="grid" id="featured"></div>
+  </div>
+</section>
+
+<!-- PROCESS TEASER -->
+<section class="section" style="background:var(--mist)">
+  <div class="wrap split">
+    <div class="stack-sm reveal">
+      <div class="eyebrow">First time renting?</div>
+      <h2 class="h-xl">Renting in NYC, explained like a person — not a contract.</h2>
+      <p class="lead">Brokers, fees, guarantors, application packets — it's a lot the first time. This short guide walks you through exactly what to expect and what to have ready, so nothing catches you off guard.</p>
+      <div style="margin-top:10px"><a class="btn btn-primary" href="guide.html">Read the guide</a></div>
+    </div>
+    <div class="reveal">
+      <div class="steps">
+        <div class="step"><div class="step-n"></div><div><h3>Know your budget</h3><p>Most landlords want income around 40× the monthly rent — we'll map what that means for you.</p></div></div>
+        <div class="step"><div class="step-n"></div><div><h3>Prep your paperwork</h3><p>Pay stubs, ID, references, and a guarantor if needed — ready before you tour.</p></div></div>
+        <div class="step"><div class="step-n"></div><div><h3>Tour &amp; apply fast</h3><p>Good apartments move in days. We help you act with confidence, not pressure.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OWNER CTA -->
+<section class="section">
+  <div class="wrap">
+    <div class="cta-band reveal">
+      <h2 class="h-lg">Own a property? Let's get it listed.</h2>
+      <p>Working with owners across the five boroughs to market apartments to qualified, pre-screened renters and buyers.</p>
+      <a class="btn btn-accent" href="owners.html">List your property</a>
+    </div>
+  </div>
+</section>
+
+<script src="data/listings.js"></script>
+<script src="js/site.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const L = window.LISTINGS.filter(x => x.status === "available");
+    document.querySelector("#stat-rentals").textContent = L.filter(x => x.type === "rental").length;
+    document.querySelector("#stat-sales").textContent = L.filter(x => x.type === "sale").length;
+    const featured = [...L.filter(x => x.type === "rental").slice(0, 2), ...L.filter(x => x.type === "sale").slice(0, 1), L.filter(x => x.type === "rental")[2]].filter(Boolean).slice(0,3);
+    document.querySelector("#featured").innerHTML = featured.map(cardHTML).join("");
+    requestAnimationFrame(() => document.querySelectorAll("#featured .reveal").forEach(e => e.classList.add("in")));
+  });
+</script>
+</body>
+</html>
